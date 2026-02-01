@@ -1,6 +1,6 @@
-# Claude Code Self-Improvement
+# sortyourselfout
 
-A system for Claude Code to learn from sessions and persist valuable discoveries to CLAUDE.md files.
+A Claude Code skill for autonomous learning - extracts valuable discoveries from sessions and persists them to CLAUDE.md files.
 
 ## How It Works
 
@@ -56,8 +56,8 @@ A system for Claude Code to learn from sessions and persist valuable discoveries
 ## Installation
 
 ```bash
-git clone <this-repo> ~/.claude/self-improvement
-cd ~/.claude/self-improvement
+git clone <this-repo> ~/.claude/sortyourselfout
+cd ~/.claude/sortyourselfout
 ./install.sh
 ```
 
@@ -65,11 +65,11 @@ Or manually:
 
 ```bash
 # Create directories
-mkdir -p ~/.claude/{hooks,skills/self-improvement,commands}
+mkdir -p ~/.claude/{hooks,skills/sortyourselfout,commands}
 
 # Copy files
 cp hooks/reflect-activator.sh ~/.claude/hooks/
-cp skills/self-improvement/SKILL.md ~/.claude/skills/self-improvement/
+cp skills/sortyourselfout/SKILL.md ~/.claude/skills/sortyourselfout/
 cp commands/reflect.md ~/.claude/commands/
 
 # Make hook executable
@@ -164,10 +164,10 @@ This system is complementary to [Claudeception](https://github.com/blader/Claude
 
 |System          |Output                   |Best For                                            |
 |----------------|-------------------------|----------------------------------------------------|
-|Self-improvement|CLAUDE.md entries        |Quick patterns, preferences, conventions            |
+|sortyourselfout |CLAUDE.md entries        |Quick patterns, preferences, conventions            |
 |Claudeception   |Standalone SKILL.md files|Complex patterns needing detailed triggers, examples|
 
-Use both together - Claudeception for sophisticated skills, self-improvement for lightweight context.
+Use both together - Claudeception for sophisticated skills, sortyourselfout for lightweight context.
 
 ## Files
 
@@ -177,7 +177,7 @@ Use both together - Claudeception for sophisticated skills, self-improvement for
 ├── hooks/
 │   └── reflect-activator.sh           # Hook script
 ├── skills/
-│   └── self-improvement/
+│   └── sortyourselfout/
 │       └── SKILL.md                   # Extraction logic
 ├── commands/
 │   └── reflect.md                     # /reflect slash command
@@ -191,7 +191,7 @@ Use both together - Claudeception for sophisticated skills, self-improvement for
 
 ### Adjusting Quality Gates
 
-Edit `~/.claude/skills/self-improvement/SKILL.md` to change what gets persisted.
+Edit `~/.claude/skills/sortyourselfout/SKILL.md` to change what gets persisted.
 
 ### Changing Persistence Format
 

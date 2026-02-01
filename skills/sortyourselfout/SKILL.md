@@ -1,16 +1,16 @@
------
-
-## name: self-improvement
+---
+name: sortyourselfout
 description: |
-Autonomous learning and context improvement for Claude Code sessions.
-Extracts valuable discoveries and persists them to CLAUDE.md files.
-Use when: session produced non-obvious solutions, debugging discoveries,
-workflow patterns, or project-specific conventions worth remembering.
-Triggers on: /reflect command, or automatically via hook after substantive tasks.
+  Autonomous learning and context improvement for Claude Code sessions.
+  Extracts valuable discoveries and persists them to CLAUDE.md files.
+  Use when: session produced non-obvious solutions, debugging discoveries,
+  workflow patterns, or project-specific conventions worth remembering.
+  Triggers on: /reflect command, or automatically via hook after substantive tasks.
 author: Claude Code
 version: 1.0.0
+---
 
-# Self-Improvement Skill
+# Sort Yourself Out Skill
 
 Enables Claude Code to learn from sessions and persist valuable knowledge to CLAUDE.md files at appropriate scope levels.
 
@@ -184,7 +184,7 @@ Persist these? (y/n/edit)
 This skill is complementary to Claudeception’s skill extraction:
 
 - **Claudeception:** Creates standalone skill files for complex, reusable patterns
-- **Self-improvement:** Appends quick learnings to CLAUDE.md for simpler patterns
+- **sortyourselfout:** Appends quick learnings to CLAUDE.md for simpler patterns
 
 Use Claudeception for patterns that need:
 
