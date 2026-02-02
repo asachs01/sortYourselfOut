@@ -55,13 +55,21 @@ A Claude Code skill for autonomous learning - extracts valuable discoveries from
 
 ## Installation
 
+### Quick Install (recommended)
+
 ```bash
-git clone <this-repo> ~/.claude/sortyourselfout
+curl -fsSL https://raw.githubusercontent.com/asachs01/sortYourselfOut/main/install-remote.sh | bash
+```
+
+### Clone & Install
+
+```bash
+git clone https://github.com/asachs01/sortYourselfOut.git ~/.claude/sortyourselfout
 cd ~/.claude/sortyourselfout
 ./install.sh
 ```
 
-Or manually:
+### Manual Install
 
 ```bash
 # Create directories
@@ -87,7 +95,21 @@ Just work normally. After completing substantive tasks, Claude silently evaluate
 
 ### Manual Mode
 
-Run `/reflect` at any point to trigger interactive reflection:
+Run `/reflect` at any point to trigger interactive reflection with approval:
+
+### Cleanup Mode
+
+Run `/prune-claude-md` periodically to prevent bloat - it reviews learnings older than 30 days, consolidates duplicates, and archives stale entries.
+
+## Available Commands
+
+| Command | Mode | Best For |
+|---------|------|----------|
+| `/reflect` | Interactive | End of meaningful sessions - shows summary and asks for approval |
+| `/prune-claude-md` | Interactive | Periodic cleanup of old learnings |
+| (automatic) | Silent | Background learning capture after substantive tasks |
+
+## Example /reflect Output
 
 ```
 > /reflect
@@ -153,10 +175,29 @@ file. The config file is generated at build time from env.
 Learnings are only persisted if they:
 
 1. **Required discovery** - Not just reading documentation
-1. **Were verified** - The solution actually worked
-1. **Are reusable** - Would help in future sessions
-1. **Are specific** - Actionable, not vague advice
-1. **Aren’t documented** - Not already in project docs
+2. **Were verified** - The solution actually worked
+3. **Are reusable** - Would help in future sessions
+4. **Are specific** - Actionable, not vague advice
+5. **Aren't documented** - Not already in project docs
+
+### Stricter User-Level Gates
+
+User-level learnings (`~/.claude/CLAUDE.md`) affect ALL future sessions, so they must also:
+
+- Apply regardless of tech stack (truly language/framework agnostic)
+- Not be tied to any specific project structure
+- Help in >50% of future projects
+- Be a workflow, preference, or tool pattern (not code-specific)
+
+## Bloat Protection
+
+Several mechanisms prevent CLAUDE.md from growing unbounded:
+
+1. **Strict quality gates** - Filters out noise before persistence
+2. **Stricter user-level gates** - Extra filtering for global learnings
+3. **Deduplication** - Scans for existing similar entries
+4. **Size warnings** - Hook warns when files exceed thresholds
+5. **Prune command** - `/prune-claude-md` reviews old entries for cleanup
 
 ## Integration with Claudeception
 
@@ -175,12 +216,14 @@ Use both together - Claudeception for sophisticated skills, sortyourselfout for 
 ~/.claude/
 ├── CLAUDE.md                          # User-level learnings
 ├── hooks/
-│   └── reflect-activator.sh           # Hook script
+│   ├── reflect-activator.sh           # Continuous learning hook
+│   └── claude-md-size-check.sh        # Size warning hook
 ├── skills/
 │   └── sortyourselfout/
 │       └── SKILL.md                   # Extraction logic
 ├── commands/
-│   └── reflect.md                     # /reflect slash command
+│   ├── reflect.md                     # /reflect slash command
+│   └── prune-claude-md.md             # /prune-claude-md command
 └── settings.json                      # Hook configuration
 
 ./
