@@ -48,18 +48,41 @@ Review the session for:
 **User-level indicators:**
 
 - Pattern applies regardless of tech stack
-- Relates to Claude’s behavior/output format
+- Relates to Claude's behavior/output format
 - Tool preference (not project-specific tooling)
 - Workflow pattern (git, testing approach, etc.)
 
 **Project-level indicators:**
 
-- Specific to this codebase’s architecture
-- Depends on project’s tech stack
+- Specific to this codebase's architecture
+- Depends on project's tech stack
 - References project-specific files/patterns
-- Only makes sense in this repo’s context
+- Only makes sense in this repo's context
 
 **When uncertain:** Default to project-level (safer, less pollution)
+
+### Step 2.5: Stricter User-Level Gates
+
+User-level learnings go to `~/.claude/CLAUDE.md` and affect ALL future sessions across ALL projects. Apply these additional gates:
+
+**User-level MUST ALSO satisfy:**
+
+- [ ] Applies regardless of tech stack (truly language/framework agnostic)
+- [ ] Not tied to any specific project structure
+- [ ] Would help in >50% of future projects
+- [ ] Is a workflow, preference, or tool pattern (not code-specific)
+
+**Examples of valid user-level learnings:**
+
+- "Prefer streaming for long operations" (workflow)
+- "Use atomic commits with conventional commit format" (git workflow)
+- "When debugging, reproduce before investigating" (methodology)
+
+**Examples that should be project-level instead:**
+
+- "This ORM requires connection_limit=1 in serverless" (tech-stack specific)
+- "Tests use vitest with jsdom environment" (project tooling)
+- "API uses /api/v1/ prefix" (project convention)
 
 ### Step 3: Quality Gate Checklist
 

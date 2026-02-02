@@ -20,18 +20,24 @@ mkdir -p "$CLAUDE_DIR/hooks"
 mkdir -p "$CLAUDE_DIR/skills/sortyourselfout"
 mkdir -p "$CLAUDE_DIR/commands"
 
-# Install hook script
-echo "Installing hook script..."
+# Install hook scripts
+echo "Installing hook scripts..."
 cp "$SCRIPT_DIR/hooks/reflect-activator.sh" "$CLAUDE_DIR/hooks/"
 chmod +x "$CLAUDE_DIR/hooks/reflect-activator.sh"
+
+cp "$SCRIPT_DIR/hooks/claude-md-size-check.sh" "$CLAUDE_DIR/hooks/"
+chmod +x "$CLAUDE_DIR/hooks/claude-md-size-check.sh"
 
 # Install skill
 echo "Installing skill..."
 cp "$SCRIPT_DIR/skills/sortyourselfout/SKILL.md" "$CLAUDE_DIR/skills/sortyourselfout/"
 
-# Install slash command
+# Install slash commands
 echo "Installing /reflect command..."
 cp "$SCRIPT_DIR/commands/reflect.md" "$CLAUDE_DIR/commands/"
+
+echo "Installing /prune-claude-md command..."
+cp "$SCRIPT_DIR/commands/prune-claude-md.md" "$CLAUDE_DIR/commands/"
 
 # Update settings.json
 SETTINGS_FILE="$CLAUDE_DIR/settings.json"
@@ -84,12 +90,15 @@ echo ""
 echo "Installation complete!"
 echo ""
 echo "Files installed:"
-echo "  ~/.claude/hooks/reflect-activator.sh  (hook script)"
+echo "  ~/.claude/hooks/reflect-activator.sh     (continuous learning hook)"
+echo "  ~/.claude/hooks/claude-md-size-check.sh  (size warning hook)"
 echo "  ~/.claude/skills/sortyourselfout/SKILL.md  (extraction logic)"
-echo "  ~/.claude/commands/reflect.md  (slash command)"
+echo "  ~/.claude/commands/reflect.md            (/reflect command)"
+echo "  ~/.claude/commands/prune-claude-md.md    (/prune-claude-md command)"
 echo ""
 echo "Usage:"
 echo "  - Automatic: Claude will silently evaluate learnings after tasks"
 echo "  - Manual: Run /reflect for interactive reflection with approval"
+echo "  - Cleanup: Run /prune-claude-md to review and consolidate old learnings"
 echo ""
 echo "Note: Restart Claude Code for changes to take effect."

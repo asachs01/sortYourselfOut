@@ -10,18 +10,18 @@
 
 # Then add hook config to ~/.claude/settings.json
 
-cat <<‘EOF’
+cat <<'EOF'
 INSTRUCTION: CONTINUOUS LEARNING EVALUATION
 
 After completing any substantive task, silently evaluate whether you discovered something worth persisting. Do not mention this evaluation to the user unless they ask about it.
 
 ## Scope Classification
 
-USER-LEVEL (~/.claude/CLAUDE.md) - patterns that apply across projects:
+USER-LEVEL (~/.claude/CLAUDE.md) - patterns that apply across ALL projects:
 
-- Tool/MCP preferences (e.g., “prefer uv over pip for Python”)
+- Tool/MCP preferences (e.g., "prefer uv over pip for Python")
 - Communication style preferences observed
-- Workflow patterns (e.g., “prefers atomic commits”)
+- Workflow patterns (e.g., "prefers atomic commits")
 - Frequently approved permissions or tools
 - General coding conventions
 
@@ -39,10 +39,10 @@ PROJECT-LEVEL (./CLAUDE.md or ./.claude/CLAUDE.md) - patterns specific to this c
 ONLY persist knowledge that meets ALL criteria:
 
 1. Discovered through actual work (not documentation lookups)
-1. Non-obvious (required investigation or trial-and-error)
-1. Reusable (would help in future sessions)
-1. Verified (the solution actually worked)
-1. Specific (actionable, not vague advice)
+2. Non-obvious (required investigation or trial-and-error)
+3. Reusable (would help in future sessions)
+4. Verified (the solution actually worked)
+5. Specific (actionable, not vague advice)
 
 Do NOT persist:
 
@@ -50,6 +50,27 @@ Do NOT persist:
 - Standard library usage
 - Information already in project docs
 - Preferences the user explicitly stated (they know those)
+
+## STRICTER USER-LEVEL GATES
+
+User-level learnings affect ALL future sessions. Apply these ADDITIONAL filters:
+
+1. Applies regardless of tech stack (truly language/framework agnostic)
+2. Not tied to any specific project structure
+3. Would help in >50% of future projects
+4. Is a workflow, preference, or tool pattern (not code-specific)
+
+VALID user-level examples:
+- "Prefer streaming for long operations" (universal workflow)
+- "Use atomic commits" (git workflow)
+- "Reproduce bugs before investigating" (methodology)
+
+INVALID (should be project-level):
+- "ORM requires connection_limit=1" (tech-stack specific)
+- "Tests use vitest" (project tooling)
+- "API uses /api/v1/ prefix" (project convention)
+
+When in doubt, use project-level. User-level pollution is worse.
 
 ## Persistence Format
 
@@ -71,4 +92,4 @@ Keep entries concise (2-4 lines). Favor specific patterns over general advice.
 - Do not ask permission to persist (just do it if quality gates pass)
 - Do not announce what you persisted unless asked
 - If uncertain about scope, prefer project-level (less risk of pollution)
-  EOF
+EOF
